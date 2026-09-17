@@ -66435,16 +66435,6 @@
 		)
 		(uuid "b8449a32-cb69-4920-8fd9-62be9a133811")
 	)
-	(text "Route JTAG through\nunused pins for\nconvenience"
-		(exclude_from_sim no)
-		(at 31.496 79.756 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "c90842a9-0a36-4e6b-9f4e-0b68b8abadac")
-	)
 	(junction
 		(at 210.82 72.39)
 		(diameter 0)
@@ -66746,12 +66736,20 @@
 		(uuid "86ca9177-20ce-4977-af53-2fb3136759e1")
 	)
 	(no_connect
+		(at 49.53 85.09)
+		(uuid "9410cec0-4b54-410c-8b40-f2463ce9b287")
+	)
+	(no_connect
 		(at 85.09 64.77)
 		(uuid "983b897f-efc9-46c1-ab5c-adc312fb2b05")
 	)
 	(no_connect
 		(at 152.4 82.55)
 		(uuid "a135d2c0-51a3-4110-94d3-873103475442")
+	)
+	(no_connect
+		(at 49.53 77.47)
+		(uuid "a32f4893-2b25-48ee-bcff-d9aacf604a28")
 	)
 	(no_connect
 		(at 152.4 74.93)
@@ -66788,6 +66786,10 @@
 	(no_connect
 		(at 120.65 143.51)
 		(uuid "f280a94f-0ca3-4488-b5d2-aceb3ee6dba6")
+	)
+	(no_connect
+		(at 49.53 80.01)
+		(uuid "f538d4fa-eddd-4c06-91c4-3426059f2bde")
 	)
 	(wire
 		(pts
@@ -67861,26 +67863,6 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 77.47) (xy 49.53 77.47)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9de70485-ef4c-42d6-8b52-16a345379785")
-	)
-	(wire
-		(pts
-			(xy 46.99 80.01) (xy 49.53 80.01)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a015c2cb-24c5-452a-bf99-66c85fc08dee")
-	)
-	(wire
-		(pts
 			(xy 152.4 52.07) (xy 134.62 52.07)
 		)
 		(stroke
@@ -68431,16 +68413,6 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 85.09) (xy 49.53 85.09)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f742fb6d-6ada-4228-9d31-311ab8611b2d")
-	)
-	(wire
-		(pts
 			(xy 133.35 151.13) (xy 134.62 151.13)
 		)
 		(stroke
@@ -68649,16 +68621,6 @@
 		)
 		(uuid "35450bb3-5771-4342-ab57-bf3a5df1b7a9")
 	)
-	(label "TCK"
-		(at 46.99 77.47 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "3696a1c6-745e-4284-81d4-1997e5a4db69")
-	)
 	(label "D0"
 		(at 87.63 74.93 0)
 		(effects
@@ -68738,16 +68700,6 @@
 			(justify left bottom)
 		)
 		(uuid "54f7aa45-f178-40bd-b1df-177edd54fcfe")
-	)
-	(label "TDI"
-		(at 46.99 80.01 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "5633baf4-ddb7-4d6b-a1f9-b6a2548dc4ef")
 	)
 	(label "XLAD2"
 		(at 87.63 59.69 0)
@@ -68838,16 +68790,6 @@
 			(justify right bottom)
 		)
 		(uuid "7cd0ac17-000d-4696-a103-e77089936ad2")
-	)
-	(label "TDO"
-		(at 46.99 85.09 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "7e5e0f22-6719-45b9-b742-9828ab4bbbb0")
 	)
 	(label "XLAD3"
 		(at 59.69 147.32 180)
