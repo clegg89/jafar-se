@@ -4658,6 +4658,19 @@
 				(justify mirror)
 			)
 		)
+		(property "Value 2" "512.256"
+			(at 0 2 90)
+			(unlocked yes)
+			(layer "B.SilkS")
+			(uuid "34750433-6e42-449e-b67e-4b33311beffa")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
 		(property ki_fp_filters "SolderJumper*Open*")
 		(path "/008193fc-122f-42e8-915e-6ac85c06b1dd")
 		(sheetname "/")
