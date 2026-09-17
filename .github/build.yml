@@ -1,0 +1,44 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - "**"
+    tags-ignore:
+      - "v*"
+
+jobs:
+  build:
+    name: Generate Artifacts
+    runs-on: ubuntu-latest
+    container:
+      image: kicad/kicad:10.0
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v7
+      - name: Run ERC
+        run: |
+          kicad-cli sch erc --exit-code-violations jafar-se.kicad_sch
+      - name: Run DRC
+        run: |
+          kicad-cli pcb drc --exit-code-violations jafar-se.kicad_pcb
+      - name: Create Schematic PDF
+        run: |
+          mkdir -p outputs/
+          kicad-cli sch export pdf --output outputs/jafar-se.pdf jafar-se.kicad_sch
+      - name: Create BOM
+        run: |
+          mkdir -p outputs/
+          kicad-cli sch export bom --output outputs/bom.csv jafar-se.kicad_sch
+      - name: Generate Gerbers
+        run: |
+          mkdir -p outputs/gerbers
+          kicad-cli pcb export gerber --output outputs/gerbers/ jafar-se.kicad_pcb
+          kicad-cli pcb export drill --output outputs/gerbers/ jafar-se.kicad_pcb
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: outputs
+          path: outputs/
+          retention-days: 1
