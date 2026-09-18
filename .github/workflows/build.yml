@@ -23,7 +23,7 @@ jobs:
     name: Generate Artifacts
     runs-on: ubuntu-latest
     container:
-      image: kicad/kicad:${{ needs.setup.outputs.kicad_version }}
+      image: ghcr.io/kicad/kicad:${{ needs.setup.outputs.kicad_version }}
       options: --user root
     steps:
       - name: Checkout Repository
