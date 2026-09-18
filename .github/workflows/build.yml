@@ -14,6 +14,8 @@ jobs:
     container:
       image: kicad/kicad:10.0
       options: --user root
+      env:
+        HOME: /home/kicad
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v7
