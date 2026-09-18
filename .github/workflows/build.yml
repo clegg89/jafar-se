@@ -51,7 +51,7 @@ jobs:
       - name: Generate Gerbers
         run: |
           mkdir -p outputs/gerbers
-          kicad-cli pcb export gerber --output outputs/gerbers/ jafar-se.kicad_pcb
+          kicad-cli pcb export gerbers --output outputs/gerbers/ jafar-se.kicad_pcb
           kicad-cli pcb export drill --output outputs/gerbers/ jafar-se.kicad_pcb
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
