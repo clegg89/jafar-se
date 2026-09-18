@@ -8,19 +8,30 @@ on:
       - "v*"
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      kicad_version: ${{ steps.v.outputs.kicad_verson }}
+    steps:
+      - name: KiCad Version
+        id: v
+        run: |
+          echo "kicad_version=10.0" >> "$GITHUB_OUTPUT"
+
   build:
+    needs: setup
     name: Generate Artifacts
     runs-on: ubuntu-latest
     container:
-      image: kicad/kicad:10.0
+      image: kicad/kicad:${{ needs.setup.outputs.kicad_version }}
       options: --user root
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v7
       - name: Seed KiCad Global Library Tables
         run: |
-          mkdir -p $HOME/.config/kicad/10.0
-          cp /usr/share/kicad/template/*-lib-table $HOME/.config/kicad/10.0
+          mkdir -p $HOME/.config/kicad/${{ needs.setup.outputs.kicad_version }}
+          cp /usr/share/kicad/template/*-lib-table $HOME/.config/kicad/${{ needs.setup.outputs.kicad_version }}
       - name: Run ERC
         run: |
           mkdir -p logs/
