@@ -14,11 +14,13 @@ jobs:
     container:
       image: kicad/kicad:10.0
       options: --user root
-      env:
-        HOME: /home/kicad
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v7
+      - name: Seed KiCad Global Library Tables
+        run: |
+          mkdir -p $HOME/.config/kicad/10.0
+          cp /usr/share/kicad/template/*-lib-table $HOME/.config/kicad/10.0
       - name: Run ERC
         run: |
           mkdir -p logs/
