@@ -47,5 +47,7 @@ jobs:
       - name: Upload Logs on Failure
         if: ${{ failure() }}
         uses: actions/upload-artifact@v7
-        path: logs/
-        retention-days: 1
+        with:
+          name: logs
+          path: logs/
+          retention-days: 1
