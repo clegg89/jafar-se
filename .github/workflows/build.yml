@@ -19,10 +19,12 @@ jobs:
         uses: actions/checkout@v7
       - name: Run ERC
         run: |
-          kicad-cli sch erc --exit-code-violations jafar-se.kicad_sch
+          mkdir -p logs/
+          kicad-cli sch erc --output logs/erc.json --format json --exit-code-violations jafar-se.kicad_sch
       - name: Run DRC
         run: |
-          kicad-cli pcb drc --exit-code-violations jafar-se.kicad_pcb
+          mkdir -p logs/
+          kicad-cli pcb drc --output logs/drc.json --format json --exit-code-violations jafar-se.kicad_pcb
       - name: Create Schematic PDF
         run: |
           mkdir -p outputs/
@@ -42,3 +44,8 @@ jobs:
           name: outputs
           path: outputs/
           retention-days: 1
+      - name: Upload Logs on Failure
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v7
+        path: logs/
+        retention-days: 1
