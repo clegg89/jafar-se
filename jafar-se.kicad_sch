@@ -72083,7 +72083,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_Wire:SolderWirePad_1x01_SMD_2x4mm"
+		(property "Footprint" "Library:SolderWirePad_1x01_SMD_2x4mm"
 			(at 41.91 165.1 0)
 			(hide yes)
 			(show_name no)
