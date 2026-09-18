@@ -11,7 +11,7 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      kicad_version: ${{ steps.v.outputs.kicad_verson }}
+      kicad_version: ${{ steps.v.outputs.kicad_version }}
     steps:
       - name: KiCad Version
         id: v
