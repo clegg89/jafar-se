@@ -7,6 +7,12 @@
 		(legacy_teardrops no)
 	)
 	(paper "A4")
+	(title_block
+		(title "Jafar SE")
+		(date "2026-09-21")
+		(rev "1")
+		(company "Clegg")
+	)
 	(layers
 		(0 "F.Cu" signal)
 		(2 "B.Cu" power)
@@ -6419,8 +6425,8 @@
 		(layer "Edge.Cuts")
 		(uuid "8ea4a9bb-1d7a-4471-a051-cdda282657b8")
 	)
-	(gr_text "Jafar - Socket Edition\nRev A\nMade by Kekule-OXC\nAdapted by Clegg"
-		(at 142.5 82.75 0)
+	(gr_text "Jafar - Socket Edition v1\nOriginal Design by Kekule-OXC\nModified by Clegg"
+		(at 136.25 81.25 0)
 		(layer "B.SilkS")
 		(uuid "90d8ee85-cfe1-4cc3-b872-a1507ffb0e8b")
 		(effects
@@ -6428,7 +6434,7 @@
 				(size 0.8 0.8)
 				(thickness 0.1)
 			)
-			(justify left bottom mirror)
+			(justify bottom mirror)
 		)
 	)
 	(dimension

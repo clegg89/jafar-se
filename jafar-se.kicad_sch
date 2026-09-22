@@ -7,7 +7,7 @@
 	(title_block
 		(title "Jafar Socket Edition")
 		(date "2026-09-03")
-		(rev "A")
+		(rev "1")
 		(company "Clegg")
 	)
 	(lib_symbols
