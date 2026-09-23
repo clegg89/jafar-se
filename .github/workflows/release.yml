@@ -6,61 +6,9 @@ on:
       - "v[0-9]+"
 
 jobs:
-  setup:
-    runs-on: ubuntu-latest
-    outputs:
-      kicad_version: ${{ steps.v.outputs.kicad_version }}
-    steps:
-      - name: KiCad Version
-        id: v
-        run: |
-          echo "kicad_version=10.0" >> "$GITHUB_OUTPUT"
-
   build:
-    needs: setup
-    name: Generate Artifacts
-    runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/kicad/kicad:${{ needs.setup.outputs.kicad_version }}
-      options: --user root
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v7
-      - name: Seed KiCad Global Library Tables
-        run: |
-          mkdir -p $HOME/.config/kicad/${{ needs.setup.outputs.kicad_version }}
-          cp /usr/share/kicad/template/*-lib-table $HOME/.config/kicad/${{ needs.setup.outputs.kicad_version }}
-      - name: Run ERC
-        run: |
-          mkdir -p logs/
-          kicad-cli sch erc --output logs/erc.json --format json --exit-code-violations jafar-se.kicad_sch
-      - name: Run DRC
-        run: |
-          mkdir -p logs/
-          kicad-cli pcb drc --output logs/drc.json --format json --exit-code-violations jafar-se.kicad_pcb
-      - name: Create Schematic PDF
-        run: |
-          mkdir -p outputs/
-          kicad-cli sch export pdf --output outputs/jafar-se.pdf jafar-se.kicad_sch
-      - name: Create BOM
-        run: |
-          mkdir -p outputs/
-          kicad-cli sch export bom --output outputs/bom.csv jafar-se.kicad_sch
-      - name: Generate Gerbers
-        run: |
-          mkdir -p outputs/gerbers
-          kicad-cli pcb export gerbers --output outputs/gerbers/ jafar-se.kicad_pcb
-          kicad-cli pcb export drill --output outputs/gerbers/ jafar-se.kicad_pcb
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
-        with:
-          name: outputs
-          path: outputs/
-          retention-days: 1
-      - name: Upload Logs on Failure
-        if: ${{ failure() }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: logs
-          path: logs/
-          retention-days: 1
+    uses: ./.github/workflows/build.yml
+    secrets: inherit
+
+  release:
+    
