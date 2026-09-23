@@ -7,16 +7,19 @@ on:
     tags-ignore:
       - "v*"
 
+  workflow_call:
+
 jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
       kicad_version: ${{ steps.v.outputs.kicad_version }}
     steps:
+      - uses: actions/checkout@v7
       - name: KiCad Version
         id: v
         run: |
-          echo "kicad_version=10.0" >> "$GITHUB_OUTPUT"
+          echo "kicad_version=$(tr -d '[:space:]' < .github/kicad-version)" >> "$GITHUB_OUTPUT"
 
   build:
     needs: setup
@@ -50,9 +53,12 @@ jobs:
           kicad-cli sch export bom --output outputs/bom.csv jafar-se.kicad_sch
       - name: Generate Gerbers
         run: |
-          mkdir -p outputs/gerbers
-          kicad-cli pcb export gerbers --output outputs/gerbers/ jafar-se.kicad_pcb
-          kicad-cli pcb export drill --output outputs/gerbers/ jafar-se.kicad_pcb
+          mkdir -p tmp
+          mkdir -p outputs/
+          kicad-cli pcb export gerbers --output tmp/ jafar-se.kicad_pcb
+          kicad-cli pcb export drill --output tmp/ jafar-se.kicad_pcb
+          cd tmp
+          zip ../outputs/gerbers.zip *
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
