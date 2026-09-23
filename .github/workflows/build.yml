@@ -29,6 +29,9 @@ jobs:
       image: ghcr.io/kicad/kicad:${{ needs.setup.outputs.kicad_version }}
       options: --user root
     steps:
+      - name: Install Zip
+        run: |
+          apt-get update && apt-get install -y zip
       - name: Checkout Repository
         uses: actions/checkout@v7
       - name: Seed KiCad Global Library Tables
