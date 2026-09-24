@@ -11,4 +11,25 @@ jobs:
     secrets: inherit
 
   release:
-    
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - name: Download Artifacts
+      uses: actions/download-artifact@v8
+      with:
+        name: outputs
+        path: outputs/
+    - name: Create Release
+      run: |
+        tag="$GITHUB_REF_NAME"
+        uploads="outputs/jafar-se.schematic.pdf outputs/jafar-se.bom.csv outputs/jafar-se.gerbers.zip"
+        if gh release view "$tag" -R "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+          gh release upload "$tag" -R "$GITHUB_REPOSITORY" $uploads
+        else
+          title=$(echo "Jafar Socket Edition $tag")
+          gh release create "$tag" -R "$GITHUB_REPOSITORY" \
+            --draft \
+            --title "$title" \
+            $uploads
+        fi

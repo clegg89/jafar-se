@@ -49,11 +49,11 @@ jobs:
       - name: Create Schematic PDF
         run: |
           mkdir -p outputs/
-          kicad-cli sch export pdf --output outputs/jafar-se.pdf jafar-se.kicad_sch
+          kicad-cli sch export pdf --output outputs/jafar-se.schematic.pdf jafar-se.kicad_sch
       - name: Create BOM
         run: |
           mkdir -p outputs/
-          kicad-cli sch export bom --output outputs/bom.csv jafar-se.kicad_sch
+          kicad-cli sch export bom --output outputs/jafar-se.bom.csv jafar-se.kicad_sch
       - name: Generate Gerbers
         run: |
           mkdir -p tmp
@@ -61,7 +61,7 @@ jobs:
           kicad-cli pcb export gerbers --output tmp/ jafar-se.kicad_pcb
           kicad-cli pcb export drill --output tmp/ jafar-se.kicad_pcb
           cd tmp
-          zip ../outputs/gerbers.zip *
+          zip ../outputs/jafar-se.gerbers.zip *
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
