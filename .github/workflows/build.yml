@@ -33,7 +33,7 @@ jobs:
           python-version: '3.14'
           cache: 'pip'
       - name: Install Packages
-        run: pip install InteractiveHtmlBom
+        run: pip install -r requirements.txt
       - name: Generate BOM
         run: generate_interactive_bom --no-browser jafar-se.kicad_pcb
 
