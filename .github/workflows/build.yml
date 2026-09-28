@@ -21,6 +21,22 @@ jobs:
         run: |
           echo "kicad_version=$(tr -d '[:space:]' < .github/kicad-version)" >> "$GITHUB_OUTPUT"
 
+  ibom:
+    name: Generate Interactive BOM
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v7
+      - name: Setup Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.14'
+          cache: 'pip'
+      - name: Install Packages
+        run: pip install InteractiveHtmlBom
+      - name: Generate BOM
+        run: generate_interactive_bom --no-browser jafar-se.kicad_pcb
+
   build:
     needs: setup
     name: Generate Artifacts
