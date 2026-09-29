@@ -21,22 +21,6 @@ jobs:
         run: |
           echo "kicad_version=$(tr -d '[:space:]' < .github/kicad-version)" >> "$GITHUB_OUTPUT"
 
-  ibom:
-    name: Generate Interactive BOM
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v7
-      - name: Setup Python
-        uses: actions/setup-python@v7
-        with:
-          python-version: '3.14'
-          cache: 'pip'
-      - name: Install Packages
-        run: pip install -r requirements.txt
-      - name: Generate BOM
-        run: generate_interactive_bom --no-browser jafar-se.kicad_pcb
-
   build:
     needs: setup
     name: Generate Artifacts
@@ -45,9 +29,10 @@ jobs:
       image: ghcr.io/kicad/kicad:${{ needs.setup.outputs.kicad_version }}
       options: --user root
     steps:
-      - name: Install Zip
+      - name: Install Packages
         run: |
-          apt-get update && apt-get install -y zip
+          apt-get update && apt-get install -y zip python3-pip xvfb
+          pip install --break-system-packages InteractiveHtmlBom==2.12.0
       - name: Checkout Repository
         uses: actions/checkout@v7
       - name: Seed KiCad Global Library Tables
@@ -70,6 +55,14 @@ jobs:
         run: |
           mkdir -p outputs/
           kicad-cli sch export bom --output outputs/jafar-se.bom.csv jafar-se.kicad_sch
+      - name: Create Interactive BOM
+        run: |
+          mkdir -p outputs/
+          xvfb-run -a generate_interactive_bom \
+            --no-browser \
+            --dest-dir "$PWD/outputs"
+            --name-format "%f_ibom" \
+            jafar-se.kicad_pcb
       - name: Generate Gerbers
         run: |
           mkdir -p tmp
