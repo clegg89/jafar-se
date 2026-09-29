@@ -26,7 +26,7 @@ jobs:
     - name: Create Release
       run: |
         tag="$GITHUB_REF_NAME"
-        uploads="outputs/jafar-se.schematic.pdf outputs/jafar-se.bom.csv outputs/jafar-se.gerbers.zip"
+        uploads="outputs/jafar-se.schematic.pdf outputs/jafar-se.bom.csv outputs/jafar-se.ibom.html outputs/jafar-se.gerbers.zip"
         if gh release view "$tag" -R "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
           gh release upload "$tag" -R "$GITHUB_REPOSITORY" $uploads
         else

@@ -61,7 +61,7 @@ jobs:
           xvfb-run -a generate_interactive_bom \
             --no-browser \
             --dest-dir "$PWD/outputs" \
-            --name-format "%f_ibom" \
+            --name-format "%f.ibom" \
             jafar-se.kicad_pcb
       - name: Generate Gerbers
         run: |
