@@ -36,6 +36,6 @@ jobs:
           gh release create "$tag" -R "$GITHUB_REPOSITORY" \
             --draft \
             --title "$title" \
-            --notes "[Interactive BOM](https://clegg89.github.io/jafar-se/$tag)"
+            --notes "[Interactive BOM](https://clegg89.github.io/jafar-se/$tag)" \
             $uploads
         fi
