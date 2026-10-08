@@ -709,19 +709,19 @@
           "group_by": true,
           "label": "DNP",
           "name": "${DNP}",
-          "show": false
+          "show": true
         },
         {
           "group_by": true,
           "label": "Exclude from BOM",
           "name": "${EXCLUDE_FROM_BOM}",
-          "show": false
+          "show": true
         },
         {
           "group_by": true,
           "label": "Exclude from Board",
           "name": "${EXCLUDE_FROM_BOARD}",
-          "show": false
+          "show": true
         },
         {
           "group_by": true,
@@ -820,7 +820,7 @@
         "uuid": "a2882f18-2859-4a66-9acb-2f0f1fe08463"
       }
     ],
-    "used_designators": "",
+    "used_designators": "#PWR25",
     "variants": []
   },
   "sheets": [
